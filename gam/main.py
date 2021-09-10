@@ -1,6 +1,8 @@
 from tkinter import *
 import random
 
+#modulok beimportálása
+
 def next_turn(row, column):
 
     global player
@@ -16,7 +18,7 @@ def next_turn(row, column):
                 label.config(text= (players[1]+" KÖVETKEZIK"))
 
             elif check_winner() is True:
-                label.config(text=(players[0]+" Nyert"))
+                label.config(text=("Az "+ players[0] + " játékos nyert"))
 
             elif check_winner() == "Döntetlen!":
                 label.config(text="Döntetlen!")
@@ -30,11 +32,11 @@ def next_turn(row, column):
                 label.config(text=(players[0]+" KÖVETKEZIK"))
 
             elif check_winner() is True:
-                label.config(text=(players[1]+" NYERT"))
+                label.config(text=("Az "+ players[1] + " játékos nyert"))
 
             elif check_winner() == "Döntetlen!":
                 label.config(text="Döntetlen!!")
-
+#elif = else if, játékmenet, mit irjon ki ha valaki nyer, veszit, döntetlen stb.
 def check_winner():
 
     for row in range(3):
@@ -62,7 +64,7 @@ def check_winner():
         buttons[1][1].config(bg="green")
         buttons[2][0].config(bg="green")
         return True
-
+#szinek, játék menet. gomb szinek, X-O
     elif empty_spaces() is False:
 
         for row in range(3):
@@ -99,7 +101,7 @@ def new_game():
     for row in range(3):
         for column in range(3):
             buttons[row][column].config(text="",bg="#F0F0F0")
-
+#Szinek, új játék
 
 window = Tk()
 window.title("AMŐBA")
@@ -108,13 +110,14 @@ player = random.choice(players)
 buttons = [[0,0,0,],
            [0,0,0,],
            [0,0,0,]]
+#Az egész window, ablak felépitése, window title/ablak cime, játékosok(x,0)
 
 label = Label(text=player + " KÖVETKEZIK", font=('consolas',40))
 label.pack(side="top")
 
 reset_button = Button(text="Újrakezdés", font=('consolas',20), command=new_game)
 reset_button.pack(side="top")
-
+#ujrakezdés, új játék készités(command = new_game) változók, reset_button pl.
 frame = Frame(window)
 frame.pack()
 
@@ -125,3 +128,4 @@ for row in range(3):
         buttons[row][column].grid(row=row,column=column)
 
 window.mainloop()
+#mindig induljon ujra az ablak, és ne záruljon be ujrajátszásnál
